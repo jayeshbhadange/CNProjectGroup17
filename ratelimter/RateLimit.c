@@ -30,7 +30,7 @@ int xdp_l2_tbf(struct xdp_md *ctx)
     void   *data= (void *)(long) ctx->data;
     // Map the Ethernet header to the data pointer 
     struct ethhdr *eth = data;
-    // Verify size of ethernet header/
+    // Verify size of ethernet header
     __u64 nh_off =sizeof(*eth);
     if (data + nh_off > data_end) {
         return XDP_DROP;
