@@ -63,3 +63,8 @@ How to run?
 
     -  Go to the directory where the files are stored.
     -  Run the command to compile 'clang xdp_loadBalancer.c -o xdp_loadBalancer -lelf -lbpf'
+    
+    
+    -  Run the command 'gcc -o xdp_loadBalancer xdp_loadBalancer.c -lbpf'
+    
+    -  Load into the kernel by running the command 'sudo ./xdp_loadBalancer'
