@@ -1,4 +1,3 @@
-// rate_limit.c
 #include <linux/bpf.h>
 #include <linux/pkt_cls.h>
 #include <linux/if_ether.h>
@@ -24,7 +23,7 @@ struct bpf_map_def SEC("maps") lladdr_map = {
 SEC("xdp")
 int xdp_l2_tbf(struct xdp_md *ctx)
 {
-    
+    bpf_printk("Hello from XDP program\n");
     struct lladdr_state *elem = NULL, entry = {0};
     __u64  now;
     void   *data_end = (void *)(long) ctx->data_end;
@@ -40,7 +39,7 @@ int xdp_l2_tbf(struct xdp_md *ctx)
     if (elem== NULL) {
         entry.tokens= MAX_PACKETS;
         entry.timestamp= bpf_ktime_get_ns();
-        entry.pkt_counter = 1; //The first packet is free 
+        entry.pkt_counter = 1; // The first packet is free 
         bpf_map_update_elem(&lladdr_map, eth->h_source, &entry, BPF_ANY);
     }else{
         if (elem->tokens == 0) {
