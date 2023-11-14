@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // Find the first program 
+    
     bpf_object__for_each_program(prog, obj) {
         prog_fd = bpf_program__fd(prog);
         break;
