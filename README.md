@@ -16,16 +16,16 @@ How to run?
   
     - `Go to the directory where the files are stored.
     
-    -  Run the command to compile *clang -O2 -target bpf -c RateLimit.c -o RateLimit.o*
+    -  Run the command to compile 'clang -O2 -target bpf -c RateLimit.c -o RateLimit.o'
     
-    -  Run the command *gcc -o load_program load_program.c -lbpf*
+    -  Run the command 'gcc -o load_program load_program.c -lbpf'
     
-    -  Load into the kernel by running the command *sudo ./load_program*
+    -  Load into the kernel by running the command 'sudo ./load_program'
     
-    -  Check if attached to interface by *ip link show <interface name>* (Note default interface in load_program.c is enp0s3, can be changed by modifying ifindex).
-    -  Send packets from another terminal and notice the result( Example run *ping google.com*) i.e. packets are dropped if the limit is crossed.
+    -  Check if attached to interface by 'ip link show <interface name>' (Note default interface in load_program.c is enp0s3, can be changed by modifying ifindex).
+    -  Send packets from another terminal and notice the result( Example run 'ping google.com') i.e. packets are dropped if the limit is crossed.
        
-    -  Offload  xdp program  from interface by running command *sudo ip link set dev <interface name> xdp off*
+    -  Offload  xdp program  from interface by running command 'sudo ip link set dev <interface name> xdp off'
 
    
 ### Firewall
@@ -37,21 +37,21 @@ How to run?
 
     - `Go to the directory where the files are stored.
     
-    -  Run the command to compile *clang -target bpf -I/usr/include/$(uname -m)-linux-gnu -g -O2 -c hello.bpf.c -o hello.bpf.o*
+    -  Run the command to compile 'clang -target bpf -I/usr/include/$(uname -m)-linux-gnu -g -O2 -c hello.bpf.c -o hello.bpf.o'
     
-    -  Inspect by running  the command *llvm-objdump -S hello.bpf.o*
+    -  Inspect by running  the command 'llvm-objdump -S hello.bpf.o'
     
-    -  Load into kernel by running the command *bpftool prog load hello.bpf.o /sys/fs/bpf/hello*
+    -  Load into kernel by running the command 'bpftool prog load hello.bpf.o /sys/fs/bpf/hello'
     
     -  To check run any of the following commands
         1. ls /sys/fs/bpf
         2. bpftool prog list
         3. bpftool prog show id 540 --pretty
-    -  Attach to interface by running the command *sudo bpftool net attach xdp id 68 dev wlo1*
+    -  Attach to interface by running the command 'sudo bpftool net attach xdp id 68 dev wlo1'
        
-    -  To traceout run *sudo cat /sys/kernel/debug/tracing/trace_pipe*
+    -  To traceout run 'sudo cat /sys/kernel/debug/tracing/trace_pipe'
 
-    -  To detach the prog run *sudo bpftool net detach xdp dev wlo1*
+    -  To detach the prog run 'sudo bpftool net detach xdp dev wlo1'
 
    
 
@@ -62,4 +62,4 @@ How to run?
 
 
     -  Go to the directory where the files are stored.
-    -  Run the command to compile **clang xdp_loadBalancer.c -o xdp_loadBalancer -lelf -lbpf**
+    -  Run the command to compile 'clang xdp_loadBalancer.c -o xdp_loadBalancer -lelf -lbpf'
