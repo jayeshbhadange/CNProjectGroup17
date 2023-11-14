@@ -23,7 +23,6 @@ struct bpf_map_def SEC("maps") lladdr_map = {
 SEC("xdp")
 int xdp_l2_tbf(struct xdp_md *ctx)
 {
-    bpf_printk("Hello from XDP program\n");
     struct lladdr_state *elem = NULL, entry = {0};
     __u64  now;
     void   *data_end = (void *)(long) ctx->data_end;
