@@ -1,4 +1,3 @@
-// load_program.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -10,8 +9,8 @@
 
 
 int main(int argc, char **argv) {
-    const char *filename = "rate_limit.o"; // Replace with your compiled eBPF program file name
-    const char *iface = "enp0s3"; // Replace with your desired network interface name
+    const char *filename = "RateLimit.o"; 
+    const char *iface = "enp0s3"; 
     int prog_fd, ret, ifindex;
 
     // Load the compiled eBPF program
@@ -28,18 +27,11 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // Find the first program (Assuming only one program exists in the object file)
+    // Find the first program 
     bpf_object__for_each_program(prog, obj) {
         prog_fd = bpf_program__fd(prog);
         break;
     }
-
-    // Get the interface index
-    /*ifindex = if_nametoindex(iface);
-    if (ifindex == 0) {
-        fprintf(stderr, "Failed to get interface index\n");
-        return 1;
-    }*/
 
     // Attach the program to XDP of the specified interface
     ret = bpf_set_link_xdp_fd(2, prog_fd, XDP_FLAGS_SKB_MODE);
@@ -55,5 +47,6 @@ int main(int argc, char **argv) {
 
     return 0;
 }
+
 
 
